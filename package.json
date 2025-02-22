@@ -9,10 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build"
   },
-  "homepage": "https://Cre8ive-collins.github.io/react1840",
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "@tailwindcss/vite": "^4.0.8",

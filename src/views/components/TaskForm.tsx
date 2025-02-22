@@ -78,13 +78,7 @@ const TaskForm: React.FC<{ onTaskCreated?: () => void, stat?: 0 | 1 | 2, task?: 
         <option value={2}>Completed</option>
       </select>
 
-      <input
-        type="text"
-        value={tag}
-        onChange={(e) => setTag(e.target.value)}
-        placeholder="Tags (comma-separated)"
-        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
+      
 
       <input
         type="date"

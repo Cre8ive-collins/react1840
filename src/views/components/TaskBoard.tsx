@@ -73,11 +73,11 @@ const TaskBoard = () => {
                     return (
                         <div
                             key={status}
-                            className="bg-gray-100 p-4 rounded-md md:w-1/3 w-full min-h-[200px] mt-5"
+                            className="bg-gray-100 p-4 rounded-md md:w-1/3 w-full min-h-[200px] max-h-[750px] overflow-y-auto mt-5"
                             onDragOver={handleDragOver}
                             onDrop={(event) => handleDrop(event, index as 0 | 1 | 2)}
                         >
-                            <div className="flex font-bold text-lg justify-between">
+                            <div className="flex font-bold text-lg justify-between sticky top-0 bg-gray-100 z-[1000]" >
                                 <span>
                                     {status} &nbsp;
                                     <Tooltip title="Sort By Due Date">
