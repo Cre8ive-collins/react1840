@@ -7,7 +7,7 @@ const TaskForm: React.FC<{ onTaskCreated?: () => void, stat?: 0 | 1 | 2, task?: 
   const [description, setDescription] = useState(task?.description || "");
   const [priority, setPriority] = useState<"low" | "high" | "medium">(task?.priority || "low");
   const [status, setStatus] = useState<0 | 1 | 2>(task?.status || stat || 0);
-  const [tag, setTag] = useState(task?.tag.join(",") || "");
+
   const [dueDate, setDueDate] = useState(task?.due_date || "");
   const { mutate: createTask, isSuccess } = useCreateTask();
   const { mutate: updateTask, isSuccess: isUpdateSuccess } = useUpdateTask()
@@ -20,7 +20,7 @@ const TaskForm: React.FC<{ onTaskCreated?: () => void, stat?: 0 | 1 | 2, task?: 
       description,
       priority,
       status,
-      tag: tag.split(",").map((t) => t.trim()),
+      tag: [],
       due_date: dueDate,
     };
     if (mode === "edit") {
