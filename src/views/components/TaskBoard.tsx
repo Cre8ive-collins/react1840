@@ -4,11 +4,11 @@ import { Task } from "../../types/global.types";
 import { useAllTasks, useUpdateTask } from "../../providers/app_commons";
 import CreateTask from "./CreateTask";
 import { PlusCircleOutlined, SortDescendingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import { Spin, Tooltip } from "antd";
 
 const TaskBoard = () => {
     const statusLabels = ["To Do", "In Progress", "Completed"];
-    const { data: tasks } = useAllTasks();
+    const { data: tasks, isLoading } = useAllTasks();
     const { mutate: updateTaskMutation, isPending } = useUpdateTask();
 
     // State to store sorting order for each column
@@ -44,13 +44,22 @@ const TaskBoard = () => {
         }));
     };
 
+    if (!isLoading && !tasks?.length) {
+        return (
+            <div className="w-full flex flex-col h-80 justify-center items-center">
+                <h1 className="text-2xl font-bold">No Tasks</h1>
+                <p className="text-center">Create a task to get started</p>
+            </div>
+        )
+    }
+
     return (
         <div className="w-full relative ">
             {isPending && <Spin className="absolute top-0 left-0" />}
             <div className="md:flex gap-4 my-5 md:w-full">
                 {statusLabels.map((status, index) => {
                     // Get sorting order
-                    const sortOrder = sortOrders[index] || "asc";
+                    const sortOrder = sortOrders[index] || "dec";
 
                     // Filter and sort tasks by due date
                     const sortedTasks = tasks
@@ -71,7 +80,9 @@ const TaskBoard = () => {
                             <div className="flex font-bold text-lg justify-between">
                                 <span>
                                     {status} &nbsp;
-                                    <SortDescendingOutlined onClick={() => toggleSortOrder(index)} className="cursor-pointer" />
+                                    <Tooltip title="Sort By Due Date">
+                                        <SortDescendingOutlined onClick={() => toggleSortOrder(index)} className="cursor-pointer" />
+                                    </Tooltip>
                                 </span>
                                 <span>
                                     <CreateTask AddButton={<PlusCircleOutlined />} stat={index as 0 | 1 | 2} />
